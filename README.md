@@ -2,6 +2,7 @@
 
 
 SQL Code
+
 CREATE TABLE `users` (
   `id` int(11) NOT NULL,
   `first_name` varchar(25) NOT NULL,
