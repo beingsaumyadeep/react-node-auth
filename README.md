@@ -2,7 +2,7 @@
 
 
 SQL Code
-
+```SQL
 CREATE TABLE `users` (
   `id` int(11) NOT NULL,
   `first_name` varchar(25) NOT NULL,
@@ -11,3 +11,4 @@ CREATE TABLE `users` (
   `password` text NOT NULL,
   `country` varchar(25) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+```
