@@ -8,7 +8,7 @@ export default class Login extends Component {
         this.state = {
           email: '',
           password: '',
-          errors: {}
+          errors: ''
           
         }
         this.onChange = this.onChange.bind(this)
@@ -66,7 +66,7 @@ export default class Login extends Component {
                     </div>
                     <div className="form-group">
                       <label htmlFor="password" className="text-info">
-                        Password:
+                        Password: {this.state.errors}
                       </label>
                       <br />
                       <input
@@ -79,7 +79,7 @@ export default class Login extends Component {
                       />
                     </div>
                     <div className="form-group">
-                      <label for="remember-me" className="text-info">
+                      <label htmlFor="remember-me" className="text-info">
                         <span></span> 
                         <span>                         
                         </span>

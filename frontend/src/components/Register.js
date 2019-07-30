@@ -1,31 +1,65 @@
 import React, { Component } from "react";
 import {  Link } from "react-router-dom";
+import { register } from "./UserFunction";
 
 export default class Register extends Component {
     constructor(props){
         super(props);
         this.state = {
-          
+          first_name: '',
+          last_name: '',
+          email: '',
+          password: '',
+          c_password: '',
+          country: '',
+          errors: {}
         }
+        this.onChange = this.onChange.bind(this)
+        this.onSubmit = this.onSubmit.bind(this)
       }
     componentDidMount(){
         document.body.style.background = "#17a2b8";
+    }
+    onChange(e) {
+      this.setState({ [e.target.name]: e.target.value })
+    }
+    onSubmit(e) {
+      e.preventDefault()
+      if (this.state.password !== this.state.c_password){
+        alert("Invalid Password")
+      }
+      else if(this.state.first_name === '' || this.state.last_name === '' || this.state.country === '' || this.state.email=== '' ){
+        alert("Enter all the fields")          
+      }
+      else{
+        const newUser = {
+          first_name: this.state.first_name,
+          last_name: this.state.last_name,
+          country: this.state.country,
+          email: this.state.email,
+          password: this.state.password
+        }
+    
+        register(newUser).then(res => {
+          this.props.history.push(`/login`)
+        })
+      }      
     }
   render() {
     return (
       <div>
         <div id="reg">          
-          <div class="container">
+          <div className="container">
             <div
               id="reg-row"
-              class="row justify-content-center align-items-center"
+              className="row justify-content-center align-items-center"
             >
-              <div id="reg-column" class="col-md-6">
-                <div id="reg-box" class="col-md-12">
-                  <form id="reg-form" class="form" action="" method="post">
-                    <h3 class="text-center text-info">Register</h3>
-                    <div class="form-group">
-                      <label htmlFor="first_name" class="text-info">
+              <div id="reg-column" className="col-md-6">
+                <div id="reg-box" className="col-md-12">
+                  <form id="reg-form" className="form" onSubmit={this.onSubmit}>
+                    <h3 className="text-center text-info">Register</h3>
+                    <div className="form-group">
+                      <label htmlFor="first_name" className="text-info">
                         First Name
                       </label>
                       <br />
@@ -33,11 +67,14 @@ export default class Register extends Component {
                         type="text"
                         name="first_name"
                         id="first_name"
-                        class="form-control"
+                        autoComplete="none"
+                        className="form-control"
+                        value = {this.state.first_name}
+                        onChange={this.onChange}
                       />
                     </div>
-                    <div class="form-group">
-                      <label htmlFor="last_name" class="text-info">
+                    <div className="form-group">
+                      <label htmlFor="last_name" className="text-info">
                         Last Name
                       </label>
                       <br />
@@ -45,42 +82,65 @@ export default class Register extends Component {
                         type="text"
                         name="last_name"
                         id="last_name"
-                        class="form-control"
+                        autoComplete="none"
+                        className="form-control"
+                        value = {this.state.last_name}
+                        onChange={this.onChange}
                       />
                     </div>
-                    <div class="form-group">
-                      <label htmlFor="email" class="text-info">
+                    <div className="form-group">
+                      <label htmlFor="email" className="text-info">
                         Email
                       </label>
                       <br />
                       <input
-                        type="text"
+                        type="email"
                         name="email"
                         id="email"
-                        class="form-control"
+                        autoComplete="none"
+                        className="form-control"
+                        value = {this.state.email}
+                        onChange={this.onChange}
                       />
                     </div>
-                    <div class="form-group">
-                      <label htmlFor="password" class="text-info">
+                    <div className="form-group">
+                      <label htmlFor="password" className="text-info">
                         Password:
                       </label>
                       <br />
                       <input
-                        type="text"
+                        type="password"
                         name="password"
                         id="password"
-                        class="form-control"
+                        autoComplete="none"
+                        className="form-control"
+                        value = {this.state.password}
+                        onChange={this.onChange}
                       />
                     </div>
-                    <div class="form-group">
-                      <label htmlFor="country" class="text-info">
+                    <div className="form-group">
+                      <label htmlFor="c_password" className="text-info">
+                        Confirm Password:
+                      </label>
+                      <br />
+                      <input
+                        type="password"
+                        name="c_password"
+                        id="c_password"
+                        autoComplete="none"
+                        className="form-control"
+                        value = {this.state.c_password}
+                        onChange={this.onChange}
+                      />
+                    </div>
+                    <div className="form-group">
+                      <label htmlFor="country" className="text-info">
                         Country:
                       </label>
                       <br />
-                      <select name="Country"> 
-                        <option value="" selected="selected">Select Country</option> 
-                        <option value="United States">United States</option> 
-                        <option value="United Kingdom">United Kingdom</option> 
+                      <select className="form-control" name="country" value = {this.state.country}
+                        onChange={this.onChange}> 
+                        <option value="DEFAULT">Select Country</option>                         
                         <option value="Afghanistan">Afghanistan</option> 
                         <option value="Albania">Albania</option> 
                         <option value="Algeria">Algeria</option> 
@@ -322,8 +382,8 @@ export default class Register extends Component {
                         <option value="Zimbabwe">Zimbabwe</option>
                     </select>
                     </div>
-                    <div class="form-group">
-                      <label htmlFor="remember-me" class="text-info">
+                    <div className="form-group">
+                      <label htmlFor="remember-me" className="text-info">
                         <span></span> 
                         <span>
                           
@@ -332,14 +392,13 @@ export default class Register extends Component {
                       <br />
                       <input
                         type="submit"
-                        name="submit"
-                        class="btn btn-info btn-md"
-                        value="submit"
+                        className="btn btn-info btn-md"
+                        value="Submit"
                       />
                     </div>
-                    <div id="register-link" class="text-right">
+                    <div id="register-link" className="text-right">
                         
-                      <Link class="text-info" to="/">Login here</Link>
+                      <Link className="text-info" to="/">Login here</Link>
                     </div>
                   </form>
                 </div>

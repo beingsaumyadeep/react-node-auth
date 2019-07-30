@@ -33,7 +33,9 @@ body {
 #reg .container #reg-row #reg-column #reg-box {
   margin-top: 120px;
   max-width: 600px;
-  height: 600px ;
+  width: 100%;
+  height: 700px ;
+  margin-bottom: 100px;
   border: 1px solid #9C9C9C;
   background-color: #EAEAEA;
 }
@@ -42,4 +44,7 @@ body {
 }
 #reg .container #reg-row #reg-column #reg-box #reg-form #register-link {
   margin-top: -85px;
+}
+.container-fluid{
+  padding: 0 !important;
 }
